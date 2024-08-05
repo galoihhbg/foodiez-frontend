@@ -1,0 +1,25 @@
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.detail-info {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    width: 33.33%;
+}
+
+@media (max-width: 992px) {
+    .detail-info {
+        width: 41.67%;
+    }
+}
+
+@media (max-width: 768px) {
+    .detail-info {
+        position: unset;
+    }
+}

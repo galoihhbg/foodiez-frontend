@@ -1,0 +1,164 @@
+.wrapper {
+    background-color: var(--color-white);
+    border: 1px rgb(217, 217, 217) solid;
+    border-radius: 0.75rem;
+    height: 512px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user {
+    display: flex;
+}
+
+.user-info span {
+    font-size: 1.2rem;
+    line-height: 1.65rem;
+    font-weight: 600;
+    color: #666666
+}
+
+
+.user-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 500px;
+    margin-right: 8px;
+}
+
+.user-name {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+}
+
+.time {
+    color: #666666;
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1.65rem;
+    align-self: flex-end;
+}
+
+.divider {
+    margin: 0 20px;
+    border: 1px rgb(217, 217, 217) solid;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+}
+
+.comment-image {
+    display: block;
+    height: 232px;
+    width: 100%;
+    padding: 0 20px;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: top left;
+        border-radius: 0.75rem;
+    }
+}
+
+.main {
+    padding: 16px 20px;
+}
+
+.name-section, .address {
+    display: -webkit-box;
+    line-height: 2.4rem;
+    max-height: 2.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.name {
+    text-decoration: none;
+    color: var(--color-text-primary);
+    font-size: 2rem;
+    font-weight: 600;
+    margin-left: 8px;
+    &:hover {
+        color: var(--color-primary-brighter);
+    }
+}
+
+.icon {
+    font-size: 2rem;
+    color: green;
+}
+
+.address {
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: #666666;
+}
+
+.value {
+    display: flex;
+    height: 26px;
+    align-items: center;
+}
+
+.score {
+    height: 16px;
+    position: relative;
+    color: var(--color-star);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg {
+    height: 16px;
+}
+
+.stars {
+    height: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    font-size: 1.6rem;
+    display: block;
+    line-height: 1.6rem;
+    width: 16px;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 0.75px #ffc200
+}
+.reviews {
+    margin-top: 1px;
+    margin-left: 8px;
+}
+
+.comment-title {
+    font-size: 1.7rem;
+    font-weight: 600;
+    line-height: 2.4rem;
+    margin-top: 4px;
+}
+
+.comment-content {
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    line-height: 2.4rem;
+    max-height: 16.8rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

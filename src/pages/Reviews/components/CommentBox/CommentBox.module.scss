@@ -1,0 +1,80 @@
+.wrapper {
+    width: 100%;
+    border: 1px rgb(217, 217, 217) solid;
+    margin-bottom: 20px;
+}
+
+.header {
+    display: flex;
+    background-color: #f2f2f2;
+    padding: 12px 12px 12px 32px;
+    border-bottom: 1px rgb(217, 217, 217) solid;
+}
+
+.user-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 500px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    margin: auto 0 auto 12px
+}
+
+.user-name {
+    width: fit-content;
+    line-height: 24px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--color-primary-brighter);
+}
+
+.posted-time {
+    line-height: 17.5px;
+    font-size: 1.4rem;
+    color: #666666;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.user-device {
+    width: fit-content;
+    line-height: 24px;
+    font-weight: 600;
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    border-radius: 0.75rem;
+    padding: 0 8px;
+}
+
+.body {
+    font-size: 1.8rem;
+    padding: 24px 32px;
+}
+
+.title {
+    line-height: 2.4rem;
+    margin: 8px 0 4px;
+}
+
+.text {
+    line-height: 24px;
+    margin-bottom: 10px;
+}
+
+.images {
+    display: flex;
+}
+
+.image {
+    width: 20%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: .75rem;
+    
+    + .image {
+        padding-left: 5px;
+    }
+}

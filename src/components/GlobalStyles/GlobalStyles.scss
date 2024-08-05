@@ -1,0 +1,50 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Niramit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+:root {
+    --color-white: rgb(255, 255, 255);
+    --color-primary: rgb(124,78,196);
+    --color-primary-brighter: #7c4ec4;
+    --color-bg: #ffffff;
+    --color-sub-bg: #f2f2f2;
+    --color-gray: rgb(154, 154, 154);
+
+    --color-text-primary: #1a1a1a;
+    --color-star: #ffc200;
+
+    //button
+    --gradient--background-button-primary: linear-gradient(to top right, #fd267a, #ff6036);
+    --color--text-hover: #ff4458;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    ::-webkit-scrollbar {
+        width: 2px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #666666;
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+}
+
+body {
+    font-family: "Niramit", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    background-color: var(--color-bg);
+}
+
+button {
+    font-family: "Niramit", sans-serif;
+}

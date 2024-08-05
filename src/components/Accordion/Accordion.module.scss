@@ -1,0 +1,17 @@
+.wrapper {
+    width: 100%;
+}
+.more {
+    display: none;
+    margin-bottom: 10px;
+}
+
+.toggle {
+    border: none;
+    background-color: transparent;
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    cursor: pointer;
+}

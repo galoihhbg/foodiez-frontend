@@ -1,0 +1,87 @@
+.wrapper {
+    margin-top: 40px;
+}
+.rating {
+    display: flex;
+}
+
+.total {
+    width: 33.33%;
+    display: flex;
+    font-size: 3rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.total-reviews {
+    font-size: 1.6rem;
+    color: #9a9a9a;
+}
+
+.list {
+    width: 66.67%;
+}
+
+.list-item {
+    display: flex;
+    font-size: 1.6rem;
+    height: 20px;
+    align-items: center;
+
+    + .list-item {
+        margin-top: 16px;
+    }
+}
+
+.aspect {
+    display: block;
+    margin-right: 10px;
+    width: 20%;
+}
+
+.container {
+    margin-top: 32px;
+}
+
+@media (max-width: 1200px) {
+    .aspect {
+        width: 25%;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    .aspect {
+        width: 40%;
+        margin-right: 0px;
+    }
+}
+
+@media (max-width: 768px) {
+    .rating {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .total {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .list {
+        width: 100%;
+    }
+
+    .aspect {
+        width: 20%;
+    }
+}
+
+@media (max-width: 576px) {
+    .aspect {
+        width: 40%;
+        margin-right: 0;
+    }
+}

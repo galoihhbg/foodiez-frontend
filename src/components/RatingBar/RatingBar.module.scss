@@ -1,0 +1,28 @@
+.wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.bar {
+    border: 1px #9a9a9a solid;
+    background-color: var(--color-white);
+    width: 85%;
+    height: 100%;
+    border-radius: 0.75rem;
+}
+
+.points {
+    margin-left: 10px;
+    width: 15%;
+}
+
+@media (max-width: 576px) {
+    .bar {
+        width: 80%;
+    }
+
+    .points {
+        width: 20%;
+    }
+}

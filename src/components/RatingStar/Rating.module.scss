@@ -1,0 +1,23 @@
+.score {
+    position: relative;
+    color: var(--color-star);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stars {
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    display: block;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 0.75px #ffc200;
+    + .star {
+        margin-left: 5px;
+    }
+}

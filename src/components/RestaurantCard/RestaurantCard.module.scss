@@ -1,0 +1,109 @@
+.wrapper {
+    background-color: inherit;
+}
+
+.image {
+    width: 100%;
+    height: 176px;
+    object-fit: cover;
+    margin-bottom: 8px;
+    border-radius: 0.875rem;
+}
+
+.name-section, .address {
+    display: -webkit-box;
+    line-height: 2.4rem;
+    max-height: 2.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.name {
+    text-decoration: none;
+    color: var(--color-text-primary);
+    font-size: 2rem;
+    font-weight: 600;
+    margin-left: 8px;
+    &:hover {
+        color: var(--color-primary-brighter);
+    }
+}
+
+.icon {
+    font-size: 2rem;
+    color: green;
+}
+
+.address {
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: #666666;
+}
+
+.value {
+    display: flex;
+    height: 26px;
+    align-items: center;
+}
+
+.score {
+    height: 16px;
+    position: relative;
+    color: var(--color-star);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg {
+    height: 16px;
+}
+
+.stars {
+    height: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    font-size: 1.6rem;
+    display: block;
+    line-height: 1.6rem;
+    width: 16px;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 0.75px #ffc200
+}
+.reviews {
+    margin-top: 1px;
+    margin-left: 8px;
+}
+
+.description {
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    line-height: 2.4rem;
+    max-height: 7.2rem;
+}
+
+@media (max-width: 1200px) {
+    .image {
+        height: 252px;
+    }
+}
+
+@media (max-width: 992px) {
+    .image {
+        height: 224px;
+    }
+}
+
+@media (max-width: 576px) {
+    .image {
+        height: 324px;
+    }
+}
