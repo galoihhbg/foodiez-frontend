@@ -1,6 +1,7 @@
 const routes = {
     home : '/',
-    reviews: '/reviews',
+    reviews: '/reviews/:city/:restaurant',
+    list: '/list/:city'
 }
 
 export default routes

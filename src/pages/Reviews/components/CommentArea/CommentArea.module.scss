@@ -1,6 +1,12 @@
 .wrapper {
     margin-top: 40px;
 }
+
+.btn-switch {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
 .rating {
     display: flex;
 }
@@ -39,6 +45,13 @@
     display: block;
     margin-right: 10px;
     width: 20%;
+}
+
+.btn-more {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 10px 0;
 }
 
 .container {

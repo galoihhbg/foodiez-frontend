@@ -3,56 +3,42 @@ import classNames from 'classnames/bind';
 import Search from './components/Search';
 import Container from '../../components/Popper/Container';
 import CommentItem from '../../components/CommentItem';
+import useFetch from '../../hooks/useFetch';
+import config from '../../config';
 
 const cx = classNames.bind(styles)
 function Home() {
-    const restaurants = [
-        {
-            image: 'https://s1.zerochan.net/Sakayanagi.Arisu.600.3582003.jpg',
-            type: 'food',
-            name: 'Lolinium',
-            address: 'Hà Nội, Việt Nam',
-            score: 2.5,
-            reviewCount: 2,
-            description: 'Rất xinh đẹp, rất tao nhã. Xin camon'
-        },
-        {
-            image: 'https://s1.zerochan.net/Sakayanagi.Arisu.600.3582003.jpg',
-            type: 'drink',
-            name: 'Lolinium',
-            address: 'Hà Nội, Việt Nam',
-            score: 4,
-            reviewCount: 2,
-            description: 'Rất xinh đẹp, rất tao nhã. Xin camon'
-        },
-        {
-            image: 'https://s1.zerochan.net/Sakayanagi.Arisu.600.3582003.jpg',
-            type: 'food',
-            name: 'Lolinium',
-            address: 'Hà Nội, Việt Nam',
-            score: 3.2,
-            reviewCount: 2,
-            description: 'Rất xinh đẹp, rất tao nhã. Xin camon'
-        },
-        {
-            image: 'https://s1.zerochan.net/Sakayanagi.Arisu.600.3582003.jpg',
-            type: 'food',
-            name: 'Lolinium',
-            address: 'Hà Nội, Việt Nam',
-            score: 4.6,
-            reviewCount: 2,
-            description: 'Rất xinh đẹp, rất tao nhã. Xin camon'
-        },
-        {
-            image: 'https://s1.zerochan.net/Sakayanagi.Arisu.600.3582003.jpg',
-            type: 'food',
-            name: 'Lolinium',
-            address: 'Hà Nội, Việt Nam',
-            score: 4.6,
-            reviewCount: 2,
-            description: 'Rất xinh đẹp, rất tao nhã. Xin camon'
-        }
-    ]
+    const basedURL = 'http://localhost:10000/restaurants'
+    const config1 = {
+        city: 'ho-chi-minh',
+        constraints: [
+            {orderBy: ['info.point_overall', 'desc']}
+        ],
+        limit: 10
+    }
+
+    const config2 = {
+        city: 'ho-chi-minh',
+        constraints: [
+            {orderBy: ['shop_order', 'asc']}
+        ],
+        limit: 10
+    }
+
+    const config3 = {
+        city: 'ho-chi-minh',
+        constraints: [
+            {orderBy: ['info.isShare', 'desc']}
+        ],
+        limit: 10
+    }
+    // eslint-disable-next-line
+    const {data: latest, error: latestError, loading: latestLoading} = useFetch(basedURL + '/index', 'POST', config2)
+    // eslint-disable-next-line
+    const {data: mostRating, error: mostRatingError, loading: mostRatingLoading} = useFetch(basedURL + '/index', 'POST', config1)
+    // eslint-disable-next-line
+    const {data: mostReview, error: mostReviewError, loading: mostReviewLoading} = useFetch(basedURL + '/index', 'POST', config3)
+
 
     const reviews = [
         {   
@@ -120,13 +106,13 @@ function Home() {
             </div>
             <div className={cx('main-part')}>
                 <section className={cx('section')}>
-                    <Container title='Gần tôi' data={restaurants} />
+                    {!latest ? '' : <Container title='Mới Nhất' toPage={config.routes.list.replace(':city', 'ho-chi-minh') + '?orderby=date-desc'} data={latest} />}
                 </section>
                 <section className={cx('section')}>
-                    <Container title='Top Hot' data={restaurants} />
+                    {!mostRating ? '' : <Container title='Điểm Cao Nhất'toPage={config.routes.list.replace(':city', 'ho-chi-minh') + '?orderby=rating-desc'} data={mostRating} />}
                 </section>
                 <section className={cx('section')}>
-                    <Container title='Mới Nhất' data={restaurants} />
+                    {!mostReview ? '' : <Container title='Nhiều Review Nhất' toPage={config.routes.list.replace(':city', 'ho-chi-minh') + '?orderby=review-desc'} data={mostReview} />}
                 </section>
                 <section className={cx('section')}>
                     <Container Comp={CommentItem} data={reviews} title='Đánh giá mới' colWidth={[1,2,3,3]} />

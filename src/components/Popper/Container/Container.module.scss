@@ -13,6 +13,7 @@
 
 .title {
     font-size: 3rem;
+    font-weight: 600;
 }
 
 .view-all {
@@ -38,7 +39,7 @@
 .slider-controls {
     color: var(--color-gray);
     position: absolute;
-    top: 122.5px;
+    top: 133px;
 }
 
 .right {
@@ -55,7 +56,7 @@
 
 @media (max-width: 1200px) {
     .slider-controls {
-        top: 160.5px;
+        top: 171px;
     }
 
     .right {
@@ -69,12 +70,12 @@
 
 @media (max-width: 992px) {
     .slider-controls {
-        top: 146.5px;
+        top: 157px;
     }
 }
 
 @media (max-width: 576px) {
     .slider-controls {
-        top: 196.5px;
+        top: 207px;
     }
 }

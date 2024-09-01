@@ -1,3 +1,16 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    padding: 0 12px;
+}
+
+.content {
+    padding: 20px 0;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -25,4 +38,12 @@
     option {
         padding: 1px 2px;
     }
+}
+
+.container {
+    width: 100%;
+}
+
+.item {
+    margin-bottom: 20px;
 }

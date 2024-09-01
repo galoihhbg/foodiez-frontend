@@ -12,7 +12,7 @@ function CommentItem({data}) {
                 <div className={cx('user')}>
                     <img className={cx('user-avatar')} src='https://i.docln.net/lightnovel/users/ua91408-72176e27-5e1c-4c76-9d36-36034335c352.jpg' alt='user avatar' />
                     <div className={cx('user-info')}>
-                        <h3 className={cx('user-name')}>Galoihhbg</h3>
+                        <p className={cx('user-name')}>Galoihhbg</p>
                         <span>Đã để lại một đánh giá</span>
                     </div>
                 </div>

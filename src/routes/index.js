@@ -2,6 +2,7 @@ import config from "../config";
 import Home from "../pages/Home";
 import MainLayout from "../layouts/MainLayout";
 import Reviews from "../pages/Reviews";
+import List from "../pages/List";
 
 const publicRoutes = [
     {
@@ -12,6 +13,11 @@ const publicRoutes = [
     {
         path: config.routes.reviews,
         component: Reviews,
+        layout: MainLayout
+    },
+    {
+        path: config.routes.list,
+        component: List,
         layout: MainLayout
     }
 ]

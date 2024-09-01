@@ -1,77 +1,69 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './RestaurantInfo.module.scss'
 import classNames from 'classnames/bind'
-import { faBookmark, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-import Button from '../../../../components/Button'
+import { useState, useEffect } from 'react';
 
 const cx = classNames.bind(styles)
-function RestaurantInfo() {
-    const data = {
-        name: 'Nanamine Yuzu',
-        score: 4.5,
-        reviewCount: 151,
-        saved: 984,
-        tags: [
-            'Sang trọng',
-            'Nhà hàng',
-            'Pháp',
-        ]
-    }
+function RestaurantInfo({data}) {
+    const [isClosed, setClosed] = useState()
+    useEffect(() => {
+        if (data.info.time_open_shop === 'Cả ngày') {
+            setClosed(false)
+            return
+        }
+        const times = data.info.time_open_shop.split(' - ');
+
+        const openingTime = times[0];
+        const closingTime = times[1];
+
+        const now = new Date();
+        const currentTime = now.getHours() * 60 + now.getMinutes();
+        const openingMinutes = parseInt(openingTime.split(':')[0]) * 60 + parseInt(openingTime.split(':')[1]);
+        const closingMinutes = parseInt(closingTime.split(':')[0]) * 60 + parseInt(closingTime.split(':')[1]);
+
+        if (currentTime >= openingMinutes && currentTime < closingMinutes) {
+            setClosed(false)
+        } else {
+            setClosed(true)
+        }
+    }, [data.info.time_open_shop])
     return ( 
         <div className={cx('wrapper')}>
             <div>
-                <h1 className={cx('res-name')}>
-                    Nanamine Yuzu
-                </h1>
+                <p className={cx('res-name')}>
+                    {data.info.name_shop}
+                </p>
 
                 <div className={cx('value')}>
-                    <div title={`${data.score}/5`} className={cx('stars')}>
+                    <div title={`${data.info.point_overall / 2}/5`} className={cx('stars')}>
                         {
                             [...Array(5).keys()].map((i) => {
-                                return <span key={i} style={{backgroundClip:'text', backgroundImage: `linear-gradient(to right, #ffc200 0, #ffc200 ${data.score >= (i+1) ? (i+1) * 40 /3 : (data.score + 1 - (i+1)) * 40/3}px, #ffffff ${data.score >= (i+1) ? (i+1) * 40 /3 : (data.score + 1 - (i+1)) * 40/3}px)`}} className={cx('star')}>&#9733;</span>
+                                return <span key={i} style={{backgroundClip:'text', backgroundImage: `linear-gradient(to right, #ffc200 0, #ffc200 ${data.info.point_overall /2 >= (i+1) ? (i+1) * 40 /3 : (data.info.point_overall /2 + 1 - (i+1)) * 40/3}px, #ffffff ${data.info.point_overall /2 >= (i+1) ? (i+1) * 40 /3 : (data.info.point_overall /2 + 1 - (i+1)) * 40/3}px)`}} className={cx('star')}>&#9733;</span>
                             })
                         }
                     </div>
 
-                    <div className={cx('reviews')}>{`(${data.reviewCount})`}</div>
+                    <div className={cx('reviews')}>{`(${data.comment})`}</div>
                     <div className={cx('divider-dot')}></div>
                     <div className={cx('saved')}>
                         <FontAwesomeIcon icon={faBookmark} />
-                        <span>{data.saved}</span>
+                        <span>{data.shop_order}</span>
                     </div>
                     <div className={cx('divider-dot')}></div>
-                    <p className={cx('status')}>Đang mở cửa</p>
-                    <p>06:30 - 22:30</p>
+                    <p className={cx('status')}>{isClosed ? 'Đã đóng cửa' : 'Đang mở cửa'}</p>
+                    <p>{data.info.time_open_shop}</p>
                 </div>
 
                 <div className={cx('images')}>
-                    <div className={cx('container')}>
-                        <div className={cx('medium-ui')}>
-                            <img className={cx('image')} src='https://pbs.twimg.com/media/GCMCy6wa8AAi0xN?format=jpg&name=medium' alt={data.name} />
-                            <div className={cx('small-ui')}>
-                                <img className={cx('image')} src='https://pbs.twimg.com/media/GCMCy6wa8AAi0xN?format=jpg&name=medium' alt={data.name} />
-                                <img className={cx('image')} src='https://pbs.twimg.com/media/GCMCy6wa8AAi0xN?format=jpg&name=medium' alt={data.name} />
-                            </div>
-                        </div>
-                        <div className={cx('large-ui')}>
-                            <img className={cx('image')} src='https://pbs.twimg.com/media/GCMCy6wa8AAi0xN?format=jpg&name=medium' alt={data.name} />
-                            <img className={cx('image')} src='https://pbs.twimg.com/media/GCMCy6wa8AAi0xN?format=jpg&name=medium' alt={data.name} />
-                        </div>
-                    </div>
-
-                    <div className={cx('btn-view-all')}>
-                        <Button bgFill medium classnames={['reviews-images--view-all']} leftIcon={<FontAwesomeIcon icon={faCamera} />}>Xem tất cả</Button>
-                    </div>
+                    <img className={cx('image')} src={data.src.slice(0, data.src.indexOf('@resize'))} alt={data.info.name_shop} />
                 </div>
 
                 <div className={cx('tag-list')}>
-                    {
-                        data.tags.map((tag, index) => {
-                            return <Link key={index} className={cx('tag-list-item')}>{tag}</Link>
-                        })
-                    }
+                    <Link className={cx('tag-list-item')}>{data.info.type_1_shop}</Link>
+                    <Link className={cx('tag-list-item')}>{data.info.type_2_shop}</Link>
                 </div>
             </div>
         </div>

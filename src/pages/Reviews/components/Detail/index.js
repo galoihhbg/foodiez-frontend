@@ -1,132 +1,137 @@
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from './Detail.module.scss'
-import classNames from 'classnames/bind'
-import { faDollarSign, faLink, faLocationDot, faPhone, faShareNodes } from '@fortawesome/free-solid-svg-icons';
-import { faBookmark, faCircleCheck, faClock } from '@fortawesome/free-regular-svg-icons';
-import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
+import styles from './Detail.module.scss';
+import classNames from 'classnames/bind';
+import { faCodeCompare, faDollarSign, faLink, faLocationDot, faShareNodes } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark, faClock } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
-import Accordion from '../../../../components/Accordion';
+import { Pie } from 'react-chartjs-2';
+import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
+import { useState } from 'react';
+import { Modal } from 'react-bootstrap';
 
-const cx = classNames.bind(styles)
-function Detail() {
-    return ( 
+Chart.register(ArcElement, Tooltip, Legend);
+
+const cx = classNames.bind(styles);
+
+function Detail({ data }) {
+   const [modalShow, setModalShow] = useState(false)
+   const sampleData1 = {
+      labels: ["Đã lọc", "Chưa lọc"],
+      datasets: [
+          {
+              label: "Số comment",
+              data: [9, 5],
+              backgroundColor: ["#7c4ec4", "#ffc200"],
+          }
+      ]
+   };
+
+   const sampleData2 = {
+      labels: ["Khen", "Chê", "Chưa rõ"],
+      datasets: [
+          {
+              label: "Số comment",
+              data: [10, 2, 2],
+              backgroundColor: ["#7c4ec4", "#ffc200", "#fd267a"],
+          }
+      ]
+   };
+
+   const options = {
+      plugins: {
+         legend: {
+            display: true,
+            position: 'bottom',
+         },
+      },
+   };
+
+   return (
         <div className={cx('wrapper')}>
+            <Modal
+                  show = {modalShow}
+                  onHide={() => setModalShow(false)}
+                  size="md"
+                  dialogClassName="modal-100w"
+                  aria-labelledby="contained-modal-title-vcenter"
+                  centered
+            >
+                  <Modal.Body>
+                     <div className={cx('container')}>
+                        <div className={cx('chart')}>
+                           <p>Số đánh giá đã lọc</p>
+                           <Pie data={sampleData1} options={options} />
+                        </div>
+
+                        <div className={cx('chart')}>
+                           <p>Phân loại các đánh giá</p>
+                           <Pie data={sampleData2} options={options} />
+                        </div>
+                     </div>
+                  </Modal.Body>
+            </Modal>
             <div className={cx('navbar')}>
-               <Link className={cx('nav-item', 'highlight', 'mobile-show')}>
+               <Link className={cx('nav-item', 'highlight', 'mobile-show')} aria-label="Link to Foody">
                   <FontAwesomeIcon className={cx('nav-item_icon')} icon={faLink} />
-                  <span>Website</span>
+                  <span>Foody</span>
                </Link>
-               <Link className={cx('nav-item', 'highlight', 'mobile-show')}>
-                  <FontAwesomeIcon className={cx('nav-item_icon')} icon={faFacebookF} />
-                  <span>Facebook</span>
+               <Link onClick={() => setModalShow(true)} className={cx('nav-item', 'highlight')} aria-label="Analysis">
+                  <FontAwesomeIcon className={cx('nav-item_icon')} icon={faCodeCompare} />
+                  <span>Phân tích</span>
                </Link>
-               <Link className={cx('nav-item', 'highlight')}>
+               <Link className={cx('nav-item', 'highlight')} aria-label="Share">
                   <FontAwesomeIcon className={cx('nav-item_icon')} icon={faShareNodes} />
                   <span>Chia sẻ</span>
                </Link>
-               <Link className={cx('nav-item', 'highlight')}>
+               <Link className={cx('nav-item', 'highlight')} aria-label="Bookmark">
                   <FontAwesomeIcon className={cx('nav-item_icon')} icon={faBookmark} />
                   <span>Theo dõi</span>
                </Link>
             </div>
-           <img className={cx('map')} src='https://static.zerochan.net/Otonari.no.Tenshi-sama.ni.Itsuno.Manika.Dame.Ningen.ni.Sareteita.full.3898954.jpg' alt='map' />
+           <img className={cx('map')} src='https://ietresearch.onlinelibrary.wiley.com/cms/asset/333d1597-cc58-40c4-b535-0b36f3bbea62/wss2bf00262-fig-0010-m.jpg' alt='Map of the location' />
            <div className={cx('list')}>
                <div className={cx('list-item', 'location')}>
-                  <FontAwesomeIcon className={cx('list-item_icon')} icon={faLocationDot} />
-                  <span>144 Xuân Thủy, Cầu Giấy, Hà Nội</span>
+                  <div className={cx('list-item_icon')}>
+                     <FontAwesomeIcon style={{marginLeft: 4}} icon={faLocationDot} />
+                  </div>
+                  <span title={data.address}>{data.address}</span>
                </div>
 
                <div className={cx('list-item', 'cost')}>
-                  <FontAwesomeIcon className={cx('list-item_icon')} icon={faDollarSign} />
-                  <span className={cx('highlight')}>20000đ - 300000đ</span>
+                  <div className={cx('list-item_icon')}>
+                     <FontAwesomeIcon icon={faDollarSign} />
+                  </div>
+                  <span title={data.info.price_avg_shop} className={cx('highlight')}>{data.info.price_avg_shop}</span>
                </div>
 
-               <div className={cx('list-item', 'phone')}>
-                  <FontAwesomeIcon className={cx('list-item_icon')} icon={faPhone} />
-                  <span className={cx('highlight')}>0325960657</span>
-               </div>
-
-               <div className={cx('list-item', 'open-time')}>
-                  <FontAwesomeIcon className={cx('list-item_icon')} icon={faClock} />
-                  <Accordion show={1}>
-                     <p>
-                        <span>Hôm nay</span>
-                        <span>06:00 - 23:30</span>
-                     </p>
-                     <p style={{marginTop: 10}}>
-                        <span>Thứ Hai</span>
-                        <span>06:00 - 23:30</span>
-                     </p>
-                     <p>
-                        <span>Thứ Ba</span>
-                        <span>06:00 - 23:30</span>
-                     </p>
-                     <p>
-                        <span>Thứ Tư</span>
-                        <span>06:00 - 23:30</span>
-                     </p>
-                     <p>
-                        <span>Thứ Năm</span>
-                        <span>06:00 - 23:30</span>
-                     </p>
-                     <p>
-                        <span>Thứ Sáu</span>
-                        <span>06:00 - 23:30</span>
-                     </p>
-                     <p>
-                        <span>Chủ Nhật</span>
-                        <span>06:00 - 23:30</span>
-                     </p>
-                  </Accordion>
+               <div className={cx('list-item')}>
+                  <div className={cx('list-item_icon')}>
+                     <FontAwesomeIcon icon={faClock} />
+                  </div>
+                  <span title={data.info.time_open_shop}>{data.info.time_open_shop}</span>
                </div>
 
                <div className={cx('list-item', 'mobile-hidden')}>
                   <FontAwesomeIcon className={cx('list-item_icon')} icon={faLink} />
-                  <span className={cx('highlight')}>nhentaiii.net</span>
+                  <span className={cx('highlight')}>{data.href}</span>
                </div>
-
-               <div className={cx('list-item', 'mobile-hidden')}>
-                  <FontAwesomeIcon className={cx('list-item_icon')} icon={faFacebookF} />
-                  <span className={cx('highlight')}>Facebook</span>
-               </div>
-
-               <hr className={cx('list-item', 'divider')} />
-
-               <Accordion show={3} ml={35} mt={0}> 
-                  <div className={cx('list-item', 'insta')}>
-                     <FontAwesomeIcon className={cx('list-item_icon')} icon={faCircleCheck} />
-                     <span>Có mang về</span>
-                  </div>
-
-                  <div className={cx('list-item', 'plus-points')}>
-                     <FontAwesomeIcon className={cx('list-item_icon')} icon={faCircleCheck} />
-                     <span>Thanh toán bằng thẻ</span>
-                  </div>
-
-                  <div className={cx('list-item', 'plus-points')}>
-                     <FontAwesomeIcon className={cx('list-item_icon')} icon={faCircleCheck} />
-                     <span>Wifi</span>
-                  </div>
-
-                  <div className={cx('list-item', 'insta')}>
-                     <FontAwesomeIcon className={cx('list-item_icon')} icon={faCircleCheck} />
-                     <span>Có mang về</span>
-                  </div>
-
-                  <div className={cx('list-item', 'plus-points')}>
-                     <FontAwesomeIcon className={cx('list-item_icon')} icon={faCircleCheck} />
-                     <span>Thanh toán bằng thẻ</span>
-                  </div>
-
-                  <div className={cx('list-item', 'plus-points')}>
-                     <FontAwesomeIcon className={cx('list-item_icon')} icon={faCircleCheck} />
-                     <span>Wifi</span>
-                  </div>
-               </Accordion>
-
+           </div>
+           <div>
            </div>
         </div>
      );
 }
+
+Detail.propTypes = {
+   data: PropTypes.shape({
+      address: PropTypes.string.isRequired,
+      info: PropTypes.shape({
+         price_avg_shop: PropTypes.string.isRequired,
+         time_open_shop: PropTypes.string.isRequired,
+      }).isRequired,
+      href: PropTypes.string.isRequired,
+   }).isRequired,
+};
 
 export default Detail;

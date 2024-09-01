@@ -18,7 +18,7 @@
     padding: 16px 64px 16px 12px;
     font-size: 1.6rem;
     line-height: 1.6rem;
-    border-radius: 0.375rem;
+    border-radius: 0.75rem;
     border: none;
     &:focus {
         outline: none;
@@ -28,14 +28,16 @@
 .search-btn {
     position: absolute;
     right: calc((100% - var(--input-width-1920)) / 2);
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 4.8rem;
     font-size: 2rem;
     padding: 1.4rem;
     color: var(--color-white);
     background-color: var(--color-primary);
-    border-top-right-radius: 0.375rem;
-    border-bottom-right-radius: 0.375rem;
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
 }
 
 .search-result {

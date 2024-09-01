@@ -4,14 +4,19 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBowlFood, faMugSaucer } from '@fortawesome/free-solid-svg-icons';
 
+import config from '../../config'
+
 const cx = classNames.bind(styles)
 function RestaurantCard({data}) {
+    let URI = config.routes.reviews
     return ( 
         <div className={cx('wrapper')}>
-            <img className={cx('image')} src={data.image} alt='restaurant view' />
+            <Link to={URI.replace(':city', data.city).replace(':restaurant', data.id)}>
+                <img className={cx('image')} src={data.image? data.image.slice(0, data.image.indexOf('@resize')) : 'https://www.bakiciilan.net/images/no-photo-available.png'} alt='restaurant view' />
+            </Link>
             <div className={cx('name-section')}>
                 <FontAwesomeIcon style={{color: data.type === 'food' ? 'green' : 'red'}} className={cx('icon')} icon={data.type === 'food' ? faBowlFood : faMugSaucer} />
-                <Link title={data.name} className={cx('name')}>{data.name}</Link>
+                <Link to={URI.replace(':city', data.city).replace(':restaurant', data.id)} title={data.name} className={cx('name')}>{data.name}</Link>
             </div>
             <span title={data.address} className={cx('address')}>{data.address}</span>
             <div className={cx('value')}>

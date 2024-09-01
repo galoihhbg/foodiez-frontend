@@ -51,7 +51,7 @@ function Container({title = '', toPage = '' ,data = [], Comp = RestaurantCard ,c
     return ( 
         <div className={cx('wrapper')}>
             <header className={cx('header')}>
-                <h1 className={cx('title')}>{title}</h1>
+                <p className={cx('title')}>{title}</p>
                 <Link to={toPage} className={cx('view-all')}>
                     <span>Xem tất cả</span>
                     <FontAwesomeIcon className={cx('icon')} icon={faAngleRight} />
@@ -66,13 +66,13 @@ function Container({title = '', toPage = '' ,data = [], Comp = RestaurantCard ,c
                     })}
                 </div>
             </div>
-            <div style={{top: Comp === CommentItem ? '290.5px' : ''}} className={cx('slider-controls', 'right', `${index - windowSize + data.length <= 0 ? 'none' :''}`)}>
+            <div style={{top: Comp === CommentItem ? '301px' : ''}} className={cx('slider-controls', 'right', `${index - windowSize + data.length <= 0 ? 'none' :''}`)}>
                 <Button onClick={(e) => handleMoveRight()} circle outline small>
                     <FontAwesomeIcon icon={faChevronRight} />
                 </Button>
             </div>
 
-            <div style={{top: Comp === CommentItem ? '290.5px' : ''}} className={cx('slider-controls', 'left', `${index >= 0 ? 'none' :''}`)}>
+            <div style={{top: Comp === CommentItem ? '301px' : ''}} className={cx('slider-controls', 'left', `${index >= 0 ? 'none' :''}`)}>
                 <Button onClick={(e) => handleMoveLeft()} circle outline small>
                     <FontAwesomeIcon icon={faChevronLeft} />
                 </Button>

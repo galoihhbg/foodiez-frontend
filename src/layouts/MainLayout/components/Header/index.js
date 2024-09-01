@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import images from '../../../../assets/images';
+import config from '../../../../config';
 
 const cx = classNames.bind(styles)
 function Header() {
@@ -30,7 +31,9 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('logo-area')}>
                 <button onClick={(e) => handleClick()} className={cx('toggle-button')}>{<FontAwesomeIcon icon={faBars} />}</button>
-                <img className={cx('logo')} alt='fudi logo' src={images.logo} />
+                <Link to={config.routes.home}>
+                    <img className={cx('logo')} alt='fudi logo' src={images.logo} />
+                </Link>
             </div>
             <div className={cx('mobile-nav')}>
                 <Button medium onlyIcon classnames={'mobile-search-button-on-header'}>{<FontAwesomeIcon icon={faMagnifyingGlass} />}</Button>
@@ -41,9 +44,9 @@ function Header() {
                     <div className={cx('nav-item', 'dropdown')}>
                         <span>Khám Phá</span>
                         <div className={cx('dropdown-menu')}>
-                            <Link className={cx('menu-item')}>Gần Tôi</Link>
-                            <Link className={cx('menu-item')}>Top Hot</Link>
-                            <Link className={cx('menu-item')}>Mới Nhất</Link>
+                            <Link to={config.routes.list.replace(':city', 'ho-chi-minh') + '?orderby=date-desc'} className={cx('menu-item')}>Mới Nhất</Link>
+                            <Link to={config.routes.list.replace(':city', 'ho-chi-minh') + '?orderby=rating-desc'} className={cx('menu-item')}>Điểm Cao Nhất</Link>
+                            <Link to={config.routes.list.replace(':city', 'ho-chi-minh') + '?orderby=review-desc'} className={cx('menu-item')}>Nhiều Review Nhất</Link>
                         </div>
                     </div>
                     <Link className={cx('nav-item')}>Shopee Food</Link>
