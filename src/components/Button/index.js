@@ -8,6 +8,7 @@ function Button(
     {
         children,
         onClick,
+        title,
         to = false,
         href = false,
         small = false,
@@ -53,7 +54,7 @@ function Button(
         [classnames] : classnames
     })
 
-    return <Comp className= {classes} {...props}>
+    return <Comp title={title} className= {classes} {...props}>
         {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
         <span className={cx('btn-name')}>{children}</span>
         {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}

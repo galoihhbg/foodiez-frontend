@@ -133,6 +133,14 @@
     &:hover {
         background-color: #f2f2f2;
     }
+
+    .btn-name {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 }
 
 .reviews-images--view-all {

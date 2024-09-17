@@ -5,12 +5,16 @@ import Container from '../../components/Popper/Container';
 import CommentItem from '../../components/CommentItem';
 import useFetch from '../../hooks/useFetch';
 import config from '../../config';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles)
 function Home() {
+    const {city} = useParams()
+    const [currentCity, setCurrentCity] = useState(city)
     const basedURL = 'http://localhost:10000/restaurants'
     const config1 = {
-        city: 'ho-chi-minh',
+        city: currentCity,
         constraints: [
             {orderBy: ['info.point_overall', 'desc']}
         ],
@@ -18,7 +22,7 @@ function Home() {
     }
 
     const config2 = {
-        city: 'ho-chi-minh',
+        city: currentCity,
         constraints: [
             {orderBy: ['shop_order', 'asc']}
         ],
@@ -26,12 +30,19 @@ function Home() {
     }
 
     const config3 = {
-        city: 'ho-chi-minh',
+        city: currentCity,
         constraints: [
             {orderBy: ['info.isShare', 'desc']}
         ],
         limit: 10
     }
+
+    useEffect(() => {
+        if (city !== currentCity) {
+            setCurrentCity(city)
+        }
+    // eslint-disable-next-line
+    }, [city])
     // eslint-disable-next-line
     const {data: latest, error: latestError, loading: latestLoading} = useFetch(basedURL + '/index', 'POST', config2)
     // eslint-disable-next-line
@@ -97,7 +108,7 @@ function Home() {
                     <img className={cx('search-bg')} src='https://i.imgur.com/VryhPt4.jpeg' alt='search section background' />
                 </picture>
                 <h1 className={cx('title')}>Tìm Nhà Hàng Theo Sở Thích</h1>
-                <Search />
+                <Search city={currentCity} />
                 <div className={cx('decor-layer')}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox='0 0 1366 217'>
                         <path d="M0,601a1849.2,1849.2,0,0,1,370-47c246.77-6.15,360,41.14,613,38,95.54-1.19,226.52-9.76,383-42q-.26,108.75-.5,217.5H-.5Z" fill="#ffffff" transform="translate(0 -550)"></path>
@@ -106,13 +117,13 @@ function Home() {
             </div>
             <div className={cx('main-part')}>
                 <section className={cx('section')}>
-                    {!latest ? '' : <Container title='Mới Nhất' toPage={config.routes.list.replace(':city', 'ho-chi-minh') + '?orderby=date-desc'} data={latest} />}
+                    {!latest ? '' : <Container title='Mới Nhất' toPage={config.routes.list.replace(':city', currentCity) + '?orderby=date-desc'} data={latest} />}
                 </section>
                 <section className={cx('section')}>
-                    {!mostRating ? '' : <Container title='Điểm Cao Nhất'toPage={config.routes.list.replace(':city', 'ho-chi-minh') + '?orderby=rating-desc'} data={mostRating} />}
+                    {!mostRating ? '' : <Container title='Điểm Cao Nhất'toPage={config.routes.list.replace(':city', currentCity) + '?orderby=rating-desc'} data={mostRating} />}
                 </section>
                 <section className={cx('section')}>
-                    {!mostReview ? '' : <Container title='Nhiều Review Nhất' toPage={config.routes.list.replace(':city', 'ho-chi-minh') + '?orderby=review-desc'} data={mostReview} />}
+                    {!mostReview ? '' : <Container title='Nhiều Review Nhất' toPage={config.routes.list.replace(':city', currentCity) + '?orderby=review-desc'} data={mostReview} />}
                 </section>
                 <section className={cx('section')}>
                     <Container Comp={CommentItem} data={reviews} title='Đánh giá mới' colWidth={[1,2,3,3]} />

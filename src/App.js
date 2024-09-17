@@ -1,4 +1,5 @@
 import {BrowserRouter as Router, Routes, Route}from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
 // eslint-disable-next-line
 import {publicRoutes, privateRoutes} from './routes'
 import { Fragment } from 'react';
@@ -8,6 +9,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
+          <Route path="/" element={<Navigate to="/ho-chi-minh" />} />
           {
             publicRoutes.map((route, index) => {
               // If this page dont have a layout, use Fragment as a tag that no need to add unnecessary node to DOM

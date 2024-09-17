@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import MainLayout from "../layouts/MainLayout";
 import Reviews from "../pages/Reviews";
 import List from "../pages/List";
+import Search from "../pages/Search";
 
 const publicRoutes = [
     {
@@ -18,6 +19,11 @@ const publicRoutes = [
     {
         path: config.routes.list,
         component: List,
+        layout: MainLayout
+    },
+    {
+        path: config.routes.search,
+        component: Search,
         layout: MainLayout
     }
 ]
