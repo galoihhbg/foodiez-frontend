@@ -7,8 +7,9 @@ import { faBookmark, faClock } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
 import { Pie } from 'react-chartjs-2';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
+import {useFetch} from '../../../../hooks'
 
 Chart.register(ArcElement, Tooltip, Legend);
 
@@ -16,6 +17,7 @@ const cx = classNames.bind(styles);
 
 function Detail({ data }) {
    const [modalShow, setModalShow] = useState(false)
+   const [location, setLocation] = useState([])
    const sampleData1 = {
       labels: ["Đã lọc", "Chưa lọc"],
       datasets: [
@@ -47,6 +49,17 @@ function Detail({ data }) {
       },
    };
 
+   // eslint-disable-next-line
+   const {data: position, error: positionError, loading: positionLoading} = useFetch(`https://nominatim.openstreetmap.org/search?q={${data.address}}}&format=json`)
+   useEffect(() => {
+      if (positionError) {
+         alert('Error!')
+         return;
+      } else if (position) {
+         console.log(position)
+         setLocation(position[0] ? position[0].boundingbox : [])
+      }
+   }, [position, positionError])
    return (
         <div className={cx('wrapper')}>
             <Modal
@@ -89,7 +102,14 @@ function Detail({ data }) {
                   <span>Theo dõi</span>
                </Link>
             </div>
-           <img className={cx('map')} src='https://ietresearch.onlinelibrary.wiley.com/cms/asset/333d1597-cc58-40c4-b535-0b36f3bbea62/wss2bf00262-fig-0010-m.jpg' alt='Map of the location' />
+           <div className={cx('map')}>
+            <iframe 
+               title={data.address} 
+               width="100%" height="100%" 
+               src={`https://master.apis.dev.openstreetmap.org/export/embed.html?bbox=${location[2]},${location[0]},${location[3]},${location[1]}&amp;layer=mapnik`} 
+               style={{borderRadius: '0.875rem'}} 
+            />
+           </div>
            <div className={cx('list')}>
                <div className={cx('list-item', 'location')}>
                   <div className={cx('list-item_icon')}>
